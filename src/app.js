@@ -1,6 +1,18 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
-const { add } = require('./lib/numbers');
+const {
+  add,
+  subtract,
+  multiply,
+  divide,
+  power,
+  round,
+  roundUp,
+  roundDown,
+  absolute,
+  quotient,
+  remainder,
+} = require('./lib/numbers');
 
 const app = express();
 
@@ -33,4 +45,24 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
     : res.status(200).json({ result: add(a, b) });
 });
 
+app.use(express.json());
+app.post('/numbers/multiply', (req, res) => {
+  const a = parseInt(req.body.a, 10);
+  const b = parseInt(req.body.b, 10);
+
+  return Number.isNaN(a) || Number.isNaN(b)
+    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
+    : req.body.a && req.body.b
+    ? res.status(200).json({ result: multiply(req.body.a, req.body.b) })
+    : res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
+});
+
 module.exports = app;
+
+/*
+app.use(express.json());
+app.post('/numbers/multiply', (req, res) => {
+  return req.body.a && req.body.b
+    ? res.status(200).json({ result: multiply(req.body.a, req.body.b) })
+    : res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
+}); */
