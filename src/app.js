@@ -1,18 +1,6 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
-const {
-  add,
-  subtract,
-  multiply,
-  divide,
-  power,
-  round,
-  roundUp,
-  roundDown,
-  absolute,
-  quotient,
-  remainder,
-} = require('./lib/numbers');
+const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 
 const app = express();
 
